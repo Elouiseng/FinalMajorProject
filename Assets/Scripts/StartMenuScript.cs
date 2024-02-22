@@ -7,18 +7,16 @@ using UnityEngine.SceneManagement;
 
 public class StartMenuScript : MonoBehaviour
 {
-    public Button playButton, settingButton, quitButton, closeSettingsButton;
-    public GameObject settingsScreen; 
+    public Button playButton, settingButton, quitButton;
+
+    public Scene settingsScene;
 
     // Start is called before the first frame update
     void Start()
     {
         playButton.onClick.AddListener(StartGame);
         settingButton.onClick.AddListener(OpenSettings);
-        closeSettingsButton.onClick.AddListener(CloseSettings);
         quitButton.onClick.AddListener(QuitGame);
-
-        settingsScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -34,12 +32,8 @@ public class StartMenuScript : MonoBehaviour
 
     void OpenSettings()
     {
-        settingsScreen.SetActive(true);
-    }
-
-    void CloseSettings()
-    {
-        settingsScreen.SetActive(false);
+        SettingsScript.SetPreviousSceneIndex(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(settingsScene.buildIndex);
     }
 
     void QuitGame()

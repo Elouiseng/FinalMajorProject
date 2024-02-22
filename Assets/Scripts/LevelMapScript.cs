@@ -9,6 +9,8 @@ public class LevelMapScript : MonoBehaviour
     public Button openPopUpButton, closePopUpButton, settingsButton, quitButton;
     public Button level1Button, level2Button;
 
+    public GameObject rightPopUp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +18,8 @@ public class LevelMapScript : MonoBehaviour
         closePopUpButton.onClick.AddListener(CloseRightPopUp);
         settingsButton.onClick.AddListener(SettingOnClick);
         quitButton.onClick.AddListener(QuitGame);
+
+        rightPopUp.SetActive(false);
     }
 
     // Update is called once per frame
@@ -24,8 +28,23 @@ public class LevelMapScript : MonoBehaviour
         
     }
 
+    void OpenRightPopUp()
+    {
+        rightPopUp.SetActive(true);
+    }
+
+    void CloseRightPopUp()
+    {
+        rightPopUp.SetActive(false);
+    }
+
     void SettingOnClick()
     {
         SceneManager.LoadScene(2);
+    }
+
+    void QuitGame()
+    {
+        Application.Quit();
     }
 }
