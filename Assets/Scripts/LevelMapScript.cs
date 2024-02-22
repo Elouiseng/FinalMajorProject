@@ -6,12 +6,16 @@ using UnityEngine.UI;
 
 public class LevelMapScript : MonoBehaviour
 {
-    public Button settingButton;
+    public Button openPopUpButton, closePopUpButton, settingsButton, quitButton;
+    public Button level1Button, level2Button;
 
     // Start is called before the first frame update
     void Start()
     {
-        settingButton.onClick.AddListener(SettingOnClick);
+        openPopUpButton.onClick.AddListener(OpenRightPopUp);
+        closePopUpButton.onClick.AddListener(CloseRightPopUp);
+        settingsButton.onClick.AddListener(SettingOnClick);
+        quitButton.onClick.AddListener(QuitGame);
     }
 
     // Update is called once per frame
