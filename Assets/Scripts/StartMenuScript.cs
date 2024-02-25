@@ -9,8 +9,6 @@ public class StartMenuScript : MonoBehaviour
 {
     public Button playButton, settingButton, quitButton;
 
-    public Scene settingsScene;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -32,8 +30,9 @@ public class StartMenuScript : MonoBehaviour
 
     void OpenSettings()
     {
-        SettingsScript.SetPreviousSceneIndex(SceneManager.GetActiveScene().buildIndex);
-        SceneManager.LoadScene(settingsScene.buildIndex);
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        PlayerPrefs.SetInt("previousScene", currentScene);
+        SceneManager.LoadScene(2);
     }
 
     void QuitGame()

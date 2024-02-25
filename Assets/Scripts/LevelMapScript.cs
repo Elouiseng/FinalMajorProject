@@ -16,10 +16,11 @@ public class LevelMapScript : MonoBehaviour
     {
         openPopUpButton.onClick.AddListener(OpenRightPopUp);
         closePopUpButton.onClick.AddListener(CloseRightPopUp);
-        settingsButton.onClick.AddListener(SettingOnClick);
+        settingsButton.onClick.AddListener(OpenSettings);
         quitButton.onClick.AddListener(QuitGame);
 
         rightPopUp.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -38,11 +39,12 @@ public class LevelMapScript : MonoBehaviour
         rightPopUp.SetActive(false);
     }
 
-    void SettingOnClick()
+    void OpenSettings()
     {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        PlayerPrefs.SetInt("previousScene", currentScene);
         SceneManager.LoadScene(2);
     }
-
     void QuitGame()
     {
         Application.Quit();
