@@ -6,12 +6,21 @@ using UnityEngine.UI;
 
 public class LevelMapScript : MonoBehaviour
 {
-    public Button settingButton;
+    public Button openPopUpButton, closePopUpButton, settingsButton, quitButton;
+    public Button level1Button, level2Button;
+
+    public GameObject rightPopUp;
 
     // Start is called before the first frame update
     void Start()
     {
-        settingButton.onClick.AddListener(SettingOnClick);
+        openPopUpButton.onClick.AddListener(OpenRightPopUp);
+        closePopUpButton.onClick.AddListener(CloseRightPopUp);
+        settingsButton.onClick.AddListener(OpenSettings);
+        quitButton.onClick.AddListener(QuitGame);
+
+        rightPopUp.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -20,8 +29,24 @@ public class LevelMapScript : MonoBehaviour
         
     }
 
-    void SettingOnClick()
+    void OpenRightPopUp()
     {
+        rightPopUp.SetActive(true);
+    }
+
+    void CloseRightPopUp()
+    {
+        rightPopUp.SetActive(false);
+    }
+
+    void OpenSettings()
+    {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        PlayerPrefs.SetInt("previousScene", currentScene);
         SceneManager.LoadScene(2);
+    }
+    void QuitGame()
+    {
+        Application.Quit();
     }
 }

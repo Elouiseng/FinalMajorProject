@@ -12,9 +12,9 @@ public class StartMenuScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playButton.onClick.AddListener(PlayOnClick);
-        settingButton.onClick.AddListener(SettingOnClick);
-        quitButton.onClick.AddListener(QuitOnClick);
+        playButton.onClick.AddListener(StartGame);
+        settingButton.onClick.AddListener(OpenSettings);
+        quitButton.onClick.AddListener(QuitGame);
     }
 
     // Update is called once per frame
@@ -23,17 +23,19 @@ public class StartMenuScript : MonoBehaviour
         
     }
 
-    void PlayOnClick()
+    void StartGame()
     {
         SceneManager.LoadScene(1);
     }
 
-    void SettingOnClick()
+    void OpenSettings()
     {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        PlayerPrefs.SetInt("previousScene", currentScene);
         SceneManager.LoadScene(2);
     }
 
-    void QuitOnClick()
+    void QuitGame()
     {
         Application.Quit();
     }
