@@ -43,7 +43,7 @@ public class LevelMapScript : MonoBehaviour
     {
         int currentScene = SceneManager.GetActiveScene().buildIndex;
         PlayerPrefs.SetInt("previousScene", currentScene);
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("SettingsScene");
     }
     void QuitGame()
     {
