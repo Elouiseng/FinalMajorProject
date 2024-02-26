@@ -9,6 +9,8 @@ public class SettingsScript : MonoBehaviour
     public Button graphicsButton, audioButton, otherButton;
     public GameObject graphicsPanel, audioPanel, otherPanel;
     public Button closeSettingsButton;
+    public Dropdown screenModeDropdown;
+
 
     private int nextSceneToOpen;
 
@@ -24,6 +26,7 @@ public class SettingsScript : MonoBehaviour
         graphicsButton.onClick.AddListener(ShowGraphicsSettings);
         audioButton.onClick.AddListener(ShowAudioSettings);
         otherButton.onClick.AddListener(ShowOtherSettings);
+        screenModeDropdown.onValueChanged.AddListener(value => OnScreenModeChanged(value));
 
         graphicsPanel.SetActive(true);
         audioPanel.SetActive(false);
@@ -70,6 +73,31 @@ public class SettingsScript : MonoBehaviour
             graphicsPanel.SetActive(false);
             audioPanel.SetActive(false);
             otherPanel.SetActive(true);
+        }
+    }
+
+    void OnScreenModeChanged(int value)
+    {
+        // Get the selected option from the dropdown
+        int selectedOption = screenModeDropdown.value;
+
+        switch (selectedOption)
+        {
+            case 0: // Fullscreen
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                break;
+
+            case 1: // Windowed
+                Screen.fullScreenMode = FullScreenMode.Windowed;
+                break;
+
+            case 2: // Windowed Fullscreen
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                break;
+
+            default:
+                Debug.LogError("Invalid screen mode option selected");
+                break;
         }
     }
 }
