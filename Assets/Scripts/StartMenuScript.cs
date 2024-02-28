@@ -14,17 +14,16 @@ public class StartMenuScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         playButton.onClick.AddListener(StartGame);
         settingButton.onClick.AddListener(OpenSettings);
         quitButton.onClick.AddListener(QuitGame);
 
-        if (!PlayerPrefs.HasKey("ScreenMode"))
-        {
-            PlayerPrefs.SetInt("ScreenMode", 0);
-        }
-        ScreenMode();
-        Debug.Log("Changed to " + PlayerPrefs.GetInt("ScreenMode"));
+        //if (!PlayerPrefs.HasKey("ScreenMode"))
+        //{
+        //    PlayerPrefs.SetInt("ScreenMode", 0);
+        //}
+        //ScreenMode();
+        //Debug.Log("Changed to " + PlayerPrefs.GetInt("ScreenMode"));
 
     }
 
