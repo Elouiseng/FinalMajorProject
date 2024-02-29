@@ -8,8 +8,7 @@ using UnityEngine.SceneManagement;
 public class StartMenuScript : MonoBehaviour
 {
     public Button playButton, settingButton, quitButton;
-
-
+    public AudioClip buttonSound;
 
     // Start is called before the first frame update
     void Start()
@@ -18,13 +17,7 @@ public class StartMenuScript : MonoBehaviour
         settingButton.onClick.AddListener(OpenSettings);
         quitButton.onClick.AddListener(QuitGame);
 
-        //if (!PlayerPrefs.HasKey("ScreenMode"))
-        //{
-        //    PlayerPrefs.SetInt("ScreenMode", 0);
-        //}
-        //ScreenMode();
-        //Debug.Log("Changed to " + PlayerPrefs.GetInt("ScreenMode"));
-
+        
     }
 
     // Update is called once per frame
@@ -33,36 +26,35 @@ public class StartMenuScript : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// BUG: Sometimes Button is not playing sound!!!!!!!!!!!!!!!!!!!!
+    /// </summary>
+
     void StartGame()
     {
+        playButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
         SceneManager.LoadScene("LevelMapScene");
     }
 
     void OpenSettings()
     {
+        settingButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
         int currentScene = SceneManager.GetActiveScene().buildIndex;
         PlayerPrefs.SetInt("previousScene", currentScene);
+        StartCoroutine(WaitForSound());
         SceneManager.LoadScene("SettingsScene");
     }
 
     void QuitGame()
     {
+        quitButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
         Application.Quit();
     }
 
-    void ScreenMode()
+    IEnumerator WaitForSound()
     {
-        if (PlayerPrefs.GetInt("ScreenMode") == 0)
-        {
-            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-        }
-        else if (PlayerPrefs.GetInt("ScreenMode") == 1)
-        {
-            Screen.fullScreenMode = FullScreenMode.Windowed;
-        }
-        else if (PlayerPrefs.GetInt("ScreenMode") == 1)
-        {
-            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-        }
+        yield return new WaitForSeconds(buttonSound.length);
     }
 }
