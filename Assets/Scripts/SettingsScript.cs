@@ -12,9 +12,8 @@ using UnityEngine.UI;
 public class SettingsScript : MonoBehaviour
 {
     // Buttons for the different setting categories
-    public Button graphicsButton, audioButton, otherButton;
+    public Button graphicsButton, audioButton, otherButton, closeSettingsButton, creditsButton, deleteProgressButton;
     public GameObject graphicsPanel, audioPanel, otherPanel;
-    public Button closeSettingsButton;
     public AudioClip buttonSound;
 
     private int nextSceneToOpen;
@@ -32,6 +31,8 @@ public class SettingsScript : MonoBehaviour
         graphicsButton.onClick.AddListener(ShowGraphicsSettings);
         audioButton.onClick.AddListener(ShowAudioSettings);
         otherButton.onClick.AddListener(ShowOtherSettings);
+
+        creditsButton.onClick.AddListener(OpenCreditsScene);
 
         graphicsPanel.SetActive(true);
         audioPanel.SetActive(false);
@@ -85,6 +86,13 @@ public class SettingsScript : MonoBehaviour
         StartCoroutine(WaitForSound());
         nextSceneToOpen = PlayerPrefs.GetInt("previousScene");
         SceneManager.LoadScene(nextSceneToOpen);
+    }
+
+    void OpenCreditsScene()
+    {
+        creditsButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        SceneManager.LoadScene("CreditsScene");
     }
 
     IEnumerator WaitForSound()
