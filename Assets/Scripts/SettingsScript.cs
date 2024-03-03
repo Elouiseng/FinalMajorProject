@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class SettingsScript : MonoBehaviour
 {
     // Buttons for the different setting categories
-    public Button graphicsButton, audioButton, otherButton, closeSettingsButton, creditsButton, deleteProgressButton;
+    public Button graphicsButton, audioButton, otherButton, closeSettingsButton, creditsButton;
     public GameObject graphicsPanel, audioPanel, otherPanel;
     public AudioClip buttonSound;
 
@@ -21,11 +21,6 @@ public class SettingsScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!PlayerPrefs.HasKey("previousScene"))
-        {
-            PlayerPrefs.SetInt("previousScene", 0);
-        }
-
         closeSettingsButton.onClick.AddListener(CloseSettings);
 
         graphicsButton.onClick.AddListener(ShowGraphicsSettings);

@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 379962223}
   - component: {fileID: 379962225}
   - component: {fileID: 379962227}
+  - component: {fileID: 379962228}
   - component: {fileID: 379962226}
   m_Layer: 0
   m_Name: SettingsHandler
@@ -224,8 +225,7 @@ MonoBehaviour:
   audioButton: {fileID: 1443368936}
   otherButton: {fileID: 890402585}
   closeSettingsButton: {fileID: 1420293147}
-  creditsButton: {fileID: 0}
-  deleteProgressButton: {fileID: 0}
+  creditsButton: {fileID: 1101675961}
   graphicsPanel: {fileID: 1887723775}
   audioPanel: {fileID: 1541076596}
   otherPanel: {fileID: 463671845}
@@ -377,6 +377,20 @@ MonoBehaviour:
   mainAudioMixer: {fileID: 24300002, guid: 511a6d534a7807a469b416186cf04118, type: 2}
   musicAudioMixer: {fileID: -8627624175558076440, guid: 511a6d534a7807a469b416186cf04118, type: 2}
   fxAudioMixer: {fileID: 2096105646558137549, guid: 511a6d534a7807a469b416186cf04118, type: 2}
+--- !u!114 &379962228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379962222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 738265c25d3a52b4da1532c1d348b992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deleteProgressButton: {fileID: 1338180475}
+  buttonSound: {fileID: 8300000, guid: 4a09040e8e6916c4aae24278581e6b06, type: 3}
 --- !u!1 &463671845 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6819192594731693435, guid: 450334179c9cdb14689e26028106160f, type: 3}
@@ -507,9 +521,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1101675961 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5327506990159969346, guid: 450334179c9cdb14689e26028106160f, type: 3}
+  m_PrefabInstance: {fileID: 5302123457430891497}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1181290075 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 624455932270098213, guid: 450334179c9cdb14689e26028106160f, type: 3}
+  m_PrefabInstance: {fileID: 5302123457430891497}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1338180475 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 829993612272036523, guid: 450334179c9cdb14689e26028106160f, type: 3}
   m_PrefabInstance: {fileID: 5302123457430891497}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

@@ -18,6 +18,10 @@ public class VolumeSettingsScript : MonoBehaviour
         mainVolumeSlider.onValueChanged.AddListener(OnMainVolumeChange);
         musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChange);
         fxVolumeSlider.onValueChanged.AddListener(OnFxVolumeChange);
+
+        mainVolumeSlider.value = PlayerPrefs.GetFloat("MainVolume");
+        musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+        fxVolumeSlider.value = PlayerPrefs.GetFloat("FxVolume");
     }
 
     // Update is called once per frame
@@ -30,17 +34,20 @@ public class VolumeSettingsScript : MonoBehaviour
     {
         float volume = mainVolumeSlider.value;
         audioMixer.SetFloat("MainParam", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("MainVolume", volume);
     }
 
     private void OnMusicVolumeChange(float arg0)
     {
         float volume = musicVolumeSlider.value;
         audioMixer.SetFloat("MusicParam", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("MusicVolume", volume);
     }
 
     private void OnFxVolumeChange(float arg0)
     {
         float volume = fxVolumeSlider.value;
         audioMixer.SetFloat("FxParam", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("FxVolume", volume);
     }
 }
