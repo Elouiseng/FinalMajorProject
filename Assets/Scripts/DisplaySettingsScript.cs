@@ -40,13 +40,14 @@ public class DisplaySettingsScript : MonoBehaviour
         resolutionDropdown.onValueChanged.AddListener(value => OnDropdownsChanged(value));
         refreshRateDropdown.onValueChanged.AddListener(value => OnDropdownsChanged(value));
 
-        resolutions = Screen.resolutions;
         PopulateDropdownOptions();
     }
 
     #region display resolution 
     void PopulateDropdownOptions()
     {
+        resolutions = Screen.resolutions;
+
         screenModeDropdown.ClearOptions();
         resolutionDropdown.ClearOptions();
         refreshRateDropdown.ClearOptions();
@@ -61,7 +62,6 @@ public class DisplaySettingsScript : MonoBehaviour
 
         foreach (var res in resolutions)
         {
-            Debug.Log(res.ToString());
             TMP_Dropdown.OptionData resolutionOption = new TMP_Dropdown.OptionData($"{res.width} x {res.height}");
             resolutionOptions.Add(resolutionOption);
         }
@@ -99,7 +99,14 @@ public class DisplaySettingsScript : MonoBehaviour
             selectedRefreshRate = RefreshRate.Sixty; // Default refresh rate
         }
 
-        applyButton.interactable = true;
+        if (selectedScreenMode.Equals(FullScreenMode.ExclusiveFullScreen))
+        {
+            resolutionDropdown.interactable = false;
+        } else
+        {
+            resolutionDropdown.interactable = true;
+        }
+            applyButton.interactable = true;
 
         screenModeDropdown.RefreshShownValue();
         resolutionDropdown.RefreshShownValue();

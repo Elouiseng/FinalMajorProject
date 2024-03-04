@@ -12,8 +12,8 @@ using UnityEngine.UI;
 public class SettingsScript : MonoBehaviour
 {
     // Buttons for the different setting categories
-    public Button graphicsButton, audioButton, otherButton, closeSettingsButton, creditsButton;
-    public GameObject graphicsPanel, audioPanel, otherPanel;
+    public Button graphicsButton, audioButton, otherButton, closeSettingsButton, creditsButton, deleteProgressButton, yesDeleteButton, noDeleteButton;
+    public GameObject graphicsPanel, audioPanel, otherPanel, deleteRequestImage;
     public AudioClip buttonSound;
 
     private int nextSceneToOpen;
@@ -28,10 +28,12 @@ public class SettingsScript : MonoBehaviour
         otherButton.onClick.AddListener(ShowOtherSettings);
 
         creditsButton.onClick.AddListener(OpenCreditsScene);
+        deleteProgressButton.onClick.AddListener(OnDeleteProgressButtonClick);
 
         graphicsPanel.SetActive(true);
         audioPanel.SetActive(false);
         otherPanel.SetActive(false);
+        deleteRequestImage.SetActive(false);
     }
 
     #region show setting category
@@ -88,6 +90,31 @@ public class SettingsScript : MonoBehaviour
         creditsButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
         StartCoroutine(WaitForSound());
         SceneManager.LoadScene("CreditsScene");
+    }
+
+    void OnDeleteProgressButtonClick()
+    {
+        deleteProgressButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        yesDeleteButton.onClick.AddListener(OnYesButtonClick);
+        noDeleteButton.onClick.AddListener(OnNoButtonClick);
+        deleteRequestImage.SetActive(true);
+    }
+    void OnYesButtonClick()
+    {
+        yesDeleteButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("StartMenuScene");
+    }
+
+    void OnNoButtonClick()
+    {
+        noDeleteButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        yesDeleteButton.onClick.RemoveAllListeners();
+        noDeleteButton.onClick.RemoveAllListeners();
+        deleteRequestImage.SetActive(false);
     }
 
     IEnumerator WaitForSound()

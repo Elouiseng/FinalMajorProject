@@ -6,12 +6,26 @@ using UnityEngine.UI;
 
 public class ProgressDataScript : MonoBehaviour
 {
-    public Button deleteProgressButton;
-    public AudioClip buttonSound;
-
+    private void Awake()
+    {
+        CreatePlayerPrefs();
+    }
 
     // Start is called before the first frame update
     void Start()
+    {
+        Debug.Log("PlayerP: " + PlayerPrefs.GetFloat("MainVolume"));
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+
+    void CreatePlayerPrefs()
     {
         if (!PlayerPrefs.HasKey("previousScene"))
         {
@@ -29,26 +43,17 @@ public class ProgressDataScript : MonoBehaviour
         {
             PlayerPrefs.SetFloat("FxVolume", 1f);
         }
-
-        deleteProgressButton.onClick.AddListener(DeleteProgressData);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void DeleteProgressData()
-    {
-        deleteProgressButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
-        StartCoroutine(WaitForSound());
-        PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene("StartMenuScene");
-    }
-
-    IEnumerator WaitForSound()
-    {
-        yield return new WaitForSeconds(buttonSound.length);
+        if (!PlayerPrefs.HasKey("FinishedLevel"))
+        {
+            PlayerPrefs.SetInt("FinishedLevel", 0);
+        }
+        if (!PlayerPrefs.HasKey("LevelOneHighscore"))
+        {
+            PlayerPrefs.SetInt("LevelOneHighscore", 0);
+        }
+        if (!PlayerPrefs.HasKey("LevelTwoHighscore"))
+        {
+            PlayerPrefs.SetInt("LevelTwoHighscore", 0);
+        }
     }
 }

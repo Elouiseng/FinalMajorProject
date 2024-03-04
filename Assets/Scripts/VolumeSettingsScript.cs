@@ -19,7 +19,11 @@ public class VolumeSettingsScript : MonoBehaviour
         musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChange);
         fxVolumeSlider.onValueChanged.AddListener(OnFxVolumeChange);
 
+        Debug.Log("PlayerP: " + PlayerPrefs.GetFloat("MainVolume"));
+
         mainVolumeSlider.value = PlayerPrefs.GetFloat("MainVolume");
+        Debug.Log("PlayerP: " + PlayerPrefs.GetFloat("MainVolume"));
+        Debug.Log("Volume value: " + mainVolumeSlider.value);
         musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume");
         fxVolumeSlider.value = PlayerPrefs.GetFloat("FxVolume");
     }
