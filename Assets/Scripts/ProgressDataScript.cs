@@ -14,7 +14,6 @@ public class ProgressDataScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("PlayerP: " + PlayerPrefs.GetFloat("MainVolume"));
 
     }
 
@@ -30,6 +29,14 @@ public class ProgressDataScript : MonoBehaviour
         if (!PlayerPrefs.HasKey("previousScene"))
         {
             PlayerPrefs.SetInt("previousScene", 0);
+        }
+        if (!PlayerPrefs.HasKey("DisplayModeOption"))
+        {
+            PlayerPrefs.SetInt("DisplayModeOption", 0);
+        }
+        if (!PlayerPrefs.HasKey("ResolutionOption"))
+        {
+            PlayerPrefs.SetInt("ResolutionOption", 0);
         }
         if (!PlayerPrefs.HasKey("MainVolume"))
         {

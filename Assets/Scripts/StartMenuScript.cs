@@ -3,21 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.Audio;
 
 public class StartMenuScript : MonoBehaviour
 {
     public Button playButton, settingButton, quitButton;
+    public AudioMixer audioMixer;
     public AudioClip buttonSound;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         playButton.onClick.AddListener(StartGame);
         settingButton.onClick.AddListener(OpenSettings);
         quitButton.onClick.AddListener(QuitGame);
+    }
 
-        
+    // Start is called before the first frame update
+    void Start()
+    {
+        audioMixer.SetFloat("MainParam", Mathf.Log10(PlayerPrefs.GetFloat("MainVolume")) * 20);
+        audioMixer.SetFloat("MusicParam", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
+        audioMixer.SetFloat("FxParam", Mathf.Log10(PlayerPrefs.GetFloat("FxVolume")) * 20);
     }
 
     // Update is called once per frame
