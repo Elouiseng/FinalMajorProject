@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class LevelMapScript : MonoBehaviour
 {
-    public Button openPopUpButton, closePopUpButton, settingsButton, quitButton;
+    public Button openPopUpButton, closePopUpButton, settingsButton, quitButton, nextLevelMapButton;
     public Button level1Button, level2Button, level3Button, level4Button, level5Button;
-    public Button Level1PlayButton;
+    public Button level1PlayButton;
     public GameObject rightPopUp, level1PopUp, level2PopUp;
     public AudioClip buttonSound;
 
@@ -18,6 +18,10 @@ public class LevelMapScript : MonoBehaviour
         closePopUpButton.onClick.AddListener(CloseRightPopUp);
         settingsButton.onClick.AddListener(OpenSettings);
         quitButton.onClick.AddListener(QuitGame);
+
+        level1Button.onClick.AddListener(OpenLevel1PopUp);
+
+
     }
     // Start is called before the first frame update
     void Start()
@@ -63,6 +67,25 @@ public class LevelMapScript : MonoBehaviour
         Application.Quit();
     }
 
+    void OpenLevel1PopUp()
+    {
+        level1PlayButton.onClick.AddListener(StartLevel1);
+        level1Button.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        level1PopUp.SetActive(true);
+    }
+
+    void OpenLevel2PopUp()
+    {
+
+    }
+
+    void StartLevel1()
+    {
+        level1PlayButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        SceneManager.LoadScene("Level1Scene");
+    }
     IEnumerator WaitForSound()
     {
         yield return new WaitForSeconds(buttonSound.length);
