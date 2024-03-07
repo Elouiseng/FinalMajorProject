@@ -7,13 +7,13 @@ using UnityEngine.Audio;
 
 public class StartMenuScript : MonoBehaviour
 {
-    public Button playButton, settingButton, quitButton;
+    public Button startButton, settingButton, quitButton;
     public AudioMixer audioMixer;
     public AudioClip buttonSound;
 
     private void Awake()
     {
-        playButton.onClick.AddListener(StartGame);
+        startButton.onClick.AddListener(StartGame);
         settingButton.onClick.AddListener(OpenSettings);
         quitButton.onClick.AddListener(QuitGame);
     }
@@ -33,16 +33,21 @@ public class StartMenuScript : MonoBehaviour
     }
 
     /// <summary>
-    /// BUG: Sometimes Button is not playing sound!!!!!!!!!!!!!!!!!!!!
+    /// Gives the start button a sound and plays it.
+    /// Waits for the sound to be finished, then opens the level map scene.
     /// </summary>
-
     void StartGame()
     {
-        playButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        startButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
         StartCoroutine(WaitForSound());
         SceneManager.LoadScene("LevelMapScene");
     }
 
+    /// <summary>
+    /// Gives the settings button a sound and plays it.
+    /// Saves index of current scene in a PlayerPref.
+    /// Waits for the sound to be finished, then opens the settings scene.
+    /// </summary>
     void OpenSettings()
     {
         settingButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
@@ -52,6 +57,10 @@ public class StartMenuScript : MonoBehaviour
         SceneManager.LoadScene("SettingsScene");
     }
 
+    /// <summary>
+    /// Gives the quit button a sound and plays it.
+    /// Waits for the sound to be finished, then closes the game.
+    /// </summary>
     void QuitGame()
     {
         quitButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
@@ -59,6 +68,10 @@ public class StartMenuScript : MonoBehaviour
         Application.Quit();
     }
 
+    /// <summary>
+    /// A method to make another method wate for the button sound.
+    /// </summary>
+    /// <returns>The length of the button sound</returns>
     IEnumerator WaitForSound()
     {
         yield return new WaitForSeconds(buttonSound.length);

@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class LevelMapScript : MonoBehaviour
 {
     public Button openPopUpButton, closePopUpButton, settingsButton, quitButton, nextLevelMapButton;
-    public Button level1Button, level2Button, level3Button, level4Button, level5Button;
-    public Button level1PlayButton;
-    public GameObject rightPopUp, level1PopUp, level2PopUp;
+    public Button level1Button, closeL1PopUpButton, level2Button, closeL2PopUpButton;
+    public Button level1PlayButton, level2PlayButton;
+    public GameObject rightPopUp, level1PopUp, level2PopUp, nextLevelMapB;
     public AudioClip buttonSound;
 
     private void Awake()
@@ -20,8 +20,12 @@ public class LevelMapScript : MonoBehaviour
         quitButton.onClick.AddListener(QuitGame);
 
         level1Button.onClick.AddListener(OpenLevel1PopUp);
+        level1PlayButton.onClick.AddListener(StartLevel1);
+        closeL1PopUpButton.onClick.AddListener(CloseLevel1PopUp);
 
-
+        level2Button.onClick.AddListener(OpenLevel2PopUp);
+        level2PlayButton.onClick.AddListener(StartLevel2);
+        closeL2PopUpButton.onClick.AddListener(CloseLevel2PopUp);
     }
     // Start is called before the first frame update
     void Start()
@@ -40,6 +44,7 @@ public class LevelMapScript : MonoBehaviour
     void OpenRightPopUp()
     {
         openPopUpButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        nextLevelMapB.SetActive(false);
         StartCoroutine(WaitForSound());
         rightPopUp.SetActive(true);
     }
@@ -47,7 +52,7 @@ public class LevelMapScript : MonoBehaviour
     void CloseRightPopUp()
     {
         closePopUpButton.GetComponent<AudioSource>().PlayOneShot(buttonSound); //BUG: This button doesn't play sound!!!!!!!!!!!!!!!!!!!!!!!
-        Debug.Log("plays sound");
+        nextLevelMapB.SetActive(true);
         StartCoroutine(WaitForSound());
         rightPopUp.SetActive(false);
     }
@@ -67,17 +72,13 @@ public class LevelMapScript : MonoBehaviour
         Application.Quit();
     }
 
+    #region Level 1
     void OpenLevel1PopUp()
     {
-        level1PlayButton.onClick.AddListener(StartLevel1);
         level1Button.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+
         StartCoroutine(WaitForSound());
         level1PopUp.SetActive(true);
-    }
-
-    void OpenLevel2PopUp()
-    {
-
     }
 
     void StartLevel1()
@@ -86,6 +87,39 @@ public class LevelMapScript : MonoBehaviour
         StartCoroutine(WaitForSound());
         SceneManager.LoadScene("Level1Scene");
     }
+
+    void CloseLevel1PopUp()
+    {
+        closeL1PopUpButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        level1PopUp.SetActive(false);
+    }
+    #endregion
+
+    #region Level 2
+    void OpenLevel2PopUp()
+    {
+        level2PlayButton.onClick.AddListener(StartLevel1);
+        level2Button.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        level1PopUp.SetActive(true);
+    }
+
+    void StartLevel2()
+    {
+        level2PlayButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        //SceneManager.LoadScene("Level2Scene");
+    }
+
+    void CloseLevel2PopUp()
+    {
+        closeL2PopUpButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        level2PopUp.SetActive(false);
+    }
+    #endregion
+
     IEnumerator WaitForSound()
     {
         yield return new WaitForSeconds(buttonSound.length);
