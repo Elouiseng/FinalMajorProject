@@ -11,16 +11,19 @@ using UnityEngine.UI;
 
 public class SettingsScript : MonoBehaviour
 {
-    // Buttons for the different setting categories
-    public Button graphicsButton, audioButton, otherButton, closeSettingsButton, creditsButton, deleteProgressButton, yesDeleteButton, noDeleteButton;
-    public GameObject graphicsPanel, audioPanel, otherPanel, deleteRequestImage;
-    public AudioClip buttonSound;
+    [SerializeField] Button graphicsButton, audioButton, otherButton, closeSettingsButton, creditsButton, deleteProgressButton, yesDeleteButton, noDeleteButton;
+    [SerializeField] AudioClip buttonSound;
 
     private int nextSceneToOpen;
-
+    private GameObject graphicsPanel, audioPanel, otherPanel, deleteRequestImage;
     // Start is called before the first frame update
     void Start()
     {
+        graphicsPanel = GameObject.Find("GraphicsButton/GraphicsPanel");
+        audioPanel = GameObject.Find("AudioButton/AudioPanel");
+        otherPanel = GameObject.Find("OtherButton/OtherPanel");
+        deleteRequestImage = GameObject.Find("DeleteProgressButton/DeleteRequestImage");
+
         closeSettingsButton.onClick.AddListener(CloseSettings);
 
         graphicsButton.onClick.AddListener(ShowGraphicsSettings);

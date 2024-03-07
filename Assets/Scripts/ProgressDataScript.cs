@@ -23,7 +23,6 @@ public class ProgressDataScript : MonoBehaviour
         
     }
 
-
     void CreatePlayerPrefs()
     {
         if (!PlayerPrefs.HasKey("previousScene"))

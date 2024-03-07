@@ -7,9 +7,9 @@ using UnityEngine.Audio;
 
 public class StartMenuScript : MonoBehaviour
 {
-    public Button startButton, settingButton, quitButton;
-    public AudioMixer audioMixer;
-    public AudioClip buttonSound;
+    [SerializeField] Button startButton, settingButton, quitButton;
+    [SerializeField] AudioMixer audioMixer;
+    [SerializeField] AudioClip buttonSound;
 
     private void Awake()
     {

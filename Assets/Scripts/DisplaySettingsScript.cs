@@ -11,9 +11,9 @@ using UnityEngine.UI;
 
 public class DisplaySettingsScript : MonoBehaviour
 {
-    public TMP_Dropdown screenModeDropdown, resolutionDropdown;
-    public Button applyButton;
-    public AudioClip buttonSound;
+    [SerializeField] TMP_Dropdown screenModeDropdown, resolutionDropdown;
+    [SerializeField] Button applyButton;
+    [SerializeField] AudioClip buttonSound;
 
     private Resolution[] resolutions;
     private FullScreenMode selectedScreenMode;
