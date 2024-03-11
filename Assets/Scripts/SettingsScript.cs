@@ -11,16 +11,19 @@ using UnityEngine.UI;
 
 public class SettingsScript : MonoBehaviour
 {
-    // Buttons for the different setting categories
-    public Button graphicsButton, audioButton, otherButton, closeSettingsButton, creditsButton;
-    public GameObject graphicsPanel, audioPanel, otherPanel;
-    public AudioClip buttonSound;
+    [SerializeField] Button graphicsButton, audioButton, otherButton, closeSettingsButton, creditsButton, deleteProgressButton, yesDeleteButton, noDeleteButton;
+    [SerializeField] AudioClip buttonSound;
 
     private int nextSceneToOpen;
-
+    private GameObject graphicsPanel, audioPanel, otherPanel, deleteRequestImage;
     // Start is called before the first frame update
     void Start()
     {
+        graphicsPanel = GameObject.Find("GraphicsButton/GraphicsPanel");
+        audioPanel = GameObject.Find("AudioButton/AudioPanel");
+        otherPanel = GameObject.Find("OtherButton/OtherPanel");
+        deleteRequestImage = GameObject.Find("DeleteProgressButton/DeleteRequestImage");
+
         closeSettingsButton.onClick.AddListener(CloseSettings);
 
         graphicsButton.onClick.AddListener(ShowGraphicsSettings);
@@ -28,10 +31,12 @@ public class SettingsScript : MonoBehaviour
         otherButton.onClick.AddListener(ShowOtherSettings);
 
         creditsButton.onClick.AddListener(OpenCreditsScene);
+        deleteProgressButton.onClick.AddListener(OnDeleteProgressButtonClick);
 
         graphicsPanel.SetActive(true);
         audioPanel.SetActive(false);
         otherPanel.SetActive(false);
+        deleteRequestImage.SetActive(false);
     }
 
     #region show setting category
@@ -88,6 +93,31 @@ public class SettingsScript : MonoBehaviour
         creditsButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
         StartCoroutine(WaitForSound());
         SceneManager.LoadScene("CreditsScene");
+    }
+
+    void OnDeleteProgressButtonClick()
+    {
+        deleteProgressButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        yesDeleteButton.onClick.AddListener(OnYesButtonClick);
+        noDeleteButton.onClick.AddListener(OnNoButtonClick);
+        deleteRequestImage.SetActive(true);
+    }
+    void OnYesButtonClick()
+    {
+        yesDeleteButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("StartMenuScene");
+    }
+
+    void OnNoButtonClick()
+    {
+        noDeleteButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        yesDeleteButton.onClick.RemoveAllListeners();
+        noDeleteButton.onClick.RemoveAllListeners();
+        deleteRequestImage.SetActive(false);
     }
 
     IEnumerator WaitForSound()

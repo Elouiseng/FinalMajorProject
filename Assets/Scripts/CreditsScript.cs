@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class CreditsScript : MonoBehaviour
 {
-    public Button closeButton;
-    public AudioClip buttonSound;
+    [SerializeField] Button closeButton;
+    [SerializeField] AudioClip buttonSound;
 
 
     // Start is called before the first frame update
