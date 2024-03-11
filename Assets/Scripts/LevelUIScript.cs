@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class LevelUIScript : MonoBehaviour
 {
     [SerializeField] Button openRightPopUpButton, closeRightPopUpButton, homeButton;
     [SerializeField] AudioClip buttonSound;
+    [SerializeField] TextMeshProUGUI timer;
+    [SerializeField] TextMeshProUGUI points;
+
 
 
     private GameObject rightPopUp;
@@ -24,6 +28,7 @@ public class LevelUIScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        timer.text +=  " start";
         rightPopUp.SetActive(false);
     }
 

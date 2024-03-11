@@ -287,6 +287,8 @@ MonoBehaviour:
   closeRightPopUpButton: {fileID: 9174743991932053766}
   homeButton: {fileID: 5662288321525217836}
   buttonSound: {fileID: 8300000, guid: 4a09040e8e6916c4aae24278581e6b06, type: 3}
+  timer: {fileID: 2122733603}
+  points: {fileID: 424645264}
 --- !u!4 &712864720
 Transform:
   m_ObjectHideFlags: 0
