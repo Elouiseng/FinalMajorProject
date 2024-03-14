@@ -228,10 +228,6 @@ MonoBehaviour:
   deleteProgressButton: {fileID: 4760401544535228738}
   yesDeleteButton: {fileID: 1765858950}
   noDeleteButton: {fileID: 1362167522}
-  graphicsPanel: {fileID: 6131714397343952675}
-  audioPanel: {fileID: 7316221563349323206}
-  otherPanel: {fileID: 1672610865215168146}
-  deleteRequestImage: {fileID: 596036621}
   buttonSound: {fileID: 8300000, guid: 4a09040e8e6916c4aae24278581e6b06, type: 3}
 --- !u!4 &379962224
 Transform:
@@ -732,9 +728,9 @@ AudioSource:
   m_GameObject: {fileID: 1362167519}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2096105646558137549, guid: 511a6d534a7807a469b416186cf04118, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1084,9 +1080,9 @@ AudioSource:
   m_GameObject: {fileID: 1765858947}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2096105646558137549, guid: 511a6d534a7807a469b416186cf04118, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3648,7 +3644,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 2096105646558137549, guid: 511a6d534a7807a469b416186cf04118, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -4453,7 +4449,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 2096105646558137549, guid: 511a6d534a7807a469b416186cf04118, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -6875,7 +6871,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 2096105646558137549, guid: 511a6d534a7807a469b416186cf04118, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

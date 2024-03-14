@@ -95,7 +95,7 @@ public class LevelUIScript : MonoBehaviour
 
         timeText.text = string.Format(" {0:00}:{1:00}:{2:000}", minutes, seconds, milliSeconds);
     }
-    
+
     void DisplayPoints()
     {
         
