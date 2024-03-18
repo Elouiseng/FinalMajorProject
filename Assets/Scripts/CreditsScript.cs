@@ -6,25 +6,30 @@ using UnityEngine.UI;
 
 public class CreditsScript : MonoBehaviour
 {
-    [SerializeField] Button closeButton;
+    [SerializeField] Button exitCreditsButton;
     [SerializeField] AudioClip buttonSound;
 
+    private void Awake()
+    {
+        exitCreditsButton.onClick.AddListener(ExitCredits);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        closeButton.onClick.AddListener(CloseCredits);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    void CloseCredits()
+    void ExitCredits()
     {
-        closeButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        Debug.Log("Button pressed");
+        exitCreditsButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
         StartCoroutine(WaitForSound());
         SceneManager.LoadScene("SettingsScene");
     }
