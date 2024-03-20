@@ -487,8 +487,9 @@ GameObject:
   - component: {fileID: 650089569}
   - component: {fileID: 650089568}
   - component: {fileID: 650089571}
+  - component: {fileID: 650089572}
   m_Layer: 0
-  m_Name: Blocky Cartoon (Unofficial)_0
+  m_Name: PlayerCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -625,6 +626,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -3.6416874}
   m_Size: {x: 2.16, y: 2.266624}
   m_Direction: 0
+--- !u!114 &650089572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650089567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cb452647c22f8e44a7ecef634d66418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextTask: []
 --- !u!1 &712864718
 GameObject:
   m_ObjectHideFlags: 0
@@ -2228,6 +2242,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 435821356}
     m_Modifications:
+    - target: {fileID: 92828214091137026, guid: aec48ed307e6ac74aa6ffd822e9f9611, type: 3}
+      propertyPath: m_Name
+      value: Navigator
+      objectReference: {fileID: 0}
     - target: {fileID: 92828214091137026, guid: aec48ed307e6ac74aa6ffd822e9f9611, type: 3}
       propertyPath: m_Layer
       value: 7

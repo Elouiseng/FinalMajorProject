@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OnClickDetectionScript : MonoBehaviour
-{ 
-    [SerializeField] GameObject navigatorsWayPoint;
+{
+    [SerializeField] private PlayerCharacterScript characterScript;
+    //[SerializeField] private GameObject navigator;
+    [SerializeField] private GameObject navigatorsWayPoint;
 
     private void Awake()
     {
+        characterScript = FindFirstObjectByType<PlayerCharacterScript>();
+
+        navigatorsWayPoint = this.transform.GetChild(0).gameObject;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        //wayPoint.x = GetComponentInChildren<Transform>().position.x;
-        //wayPoint.y = GetComponentInChildren<Transform>().position.y;
-
 
     }
 
@@ -28,8 +30,7 @@ public class OnClickDetectionScript : MonoBehaviour
     private void OnMouseDown()
     {
         Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
-        Debug.Log("Clicked " + navigatorsWayPoint.transform.localPosition);
 
-        
+        characterScript.nextTask.Add(this.gameObject);
     }
 }
