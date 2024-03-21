@@ -5,13 +5,14 @@ using UnityEngine;
 public class OnClickDetectionScript : MonoBehaviour
 {
     [SerializeField] private PlayerCharacterScript characterScript;
-    //[SerializeField] private GameObject navigator;
+    [SerializeField] private GameObject navigatorsParent;
     [SerializeField] private GameObject navigatorsWayPoint;
 
     private void Awake()
     {
         characterScript = FindFirstObjectByType<PlayerCharacterScript>();
 
+        navigatorsParent = this.transform.parent.gameObject;
         navigatorsWayPoint = this.transform.GetChild(0).gameObject;
     }
 
@@ -29,8 +30,14 @@ public class OnClickDetectionScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
+        //Debug.Log("Test 1: OnMouseDown");
+        //Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
 
-        characterScript.nextTask.Add(this.gameObject);
+        //if (Physics.Raycast(ray, out RaycastHit hit))
+        //{
+            Debug.Log("Test 2 : OnMouseDown");
+
+            characterScript.nextTask.Add(new TaskDataScript(navigatorsParent.name, navigatorsWayPoint.transform.position));
+        //}
     }
 }

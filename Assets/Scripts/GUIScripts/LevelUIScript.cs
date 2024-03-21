@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Audio;
 
 public class LevelUIScript : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class LevelUIScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] string levelName;
     [SerializeField] float amountTime;
+    [SerializeField] AudioMixer audioMixer;
+
 
     private float timeRemaining;
     private bool timerIsRunning;
@@ -36,6 +39,10 @@ public class LevelUIScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioMixer.SetFloat("MainParam", Mathf.Log10(PlayerPrefs.GetFloat("MainVolume")) * 20);
+        audioMixer.SetFloat("MusicParam", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
+        audioMixer.SetFloat("FxParam", Mathf.Log10(PlayerPrefs.GetFloat("FxVolume")) * 20);
+
         scoreText.text += " " + earnedPoints;
         levelText.text += " " + levelName;
 

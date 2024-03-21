@@ -678,6 +678,7 @@ MonoBehaviour:
   levelText: {fileID: 1382978115}
   levelName: 1-1
   amountTime: 60
+  audioMixer: {fileID: 24100000, guid: 511a6d534a7807a469b416186cf04118, type: 2}
 --- !u!4 &712864720
 Transform:
   m_ObjectHideFlags: 0
