@@ -87,7 +87,6 @@ public class DisplaySettingsScript : MonoBehaviour
 
     void ApplySettings()
     {
-        //Debug.Log("Setting the values to: " + selectedResolution.width.ToString() + "x" + selectedResolution.height.ToString() + ", " + selectedScreenMode.ToString());
         applyButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
         StartCoroutine(WaitForSound());
 

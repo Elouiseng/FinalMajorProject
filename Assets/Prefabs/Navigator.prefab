@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1124024414646326242}
   m_Layer: 0
   m_Name: Navigator
-  m_TagString: Untagged
+  m_TagString: Navigator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,7 +92,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b95212330e92214c8f4d12a8700d5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navigatorsWayPoint: {fileID: 5547313383379525635}
 --- !u!1 &5547313383379525635
 GameObject:
   m_ObjectHideFlags: 0
