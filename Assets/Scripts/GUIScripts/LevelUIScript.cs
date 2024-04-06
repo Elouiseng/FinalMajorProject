@@ -53,13 +53,17 @@ public class LevelUIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LevelTimer();
+        if (timerIsRunning)
+        {
+            LevelTimer();
+        }
     }
 
     void OpenRightPopUp() 
     {
         openRightPopUpButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
         StartCoroutine(WaitForSound());
+        timerIsRunning = false;
         rightPopUp.SetActive(true);
     }
 
@@ -67,6 +71,7 @@ public class LevelUIScript : MonoBehaviour
     {
         closeRightPopUpButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
         StartCoroutine(WaitForSound());
+        timerIsRunning = true;
         rightPopUp.SetActive(false);
     }
 
@@ -79,8 +84,6 @@ public class LevelUIScript : MonoBehaviour
 
     void LevelTimer()
     {
-        if (timerIsRunning)
-        {
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
@@ -91,7 +94,6 @@ public class LevelUIScript : MonoBehaviour
                 timeRemaining = 0;
                 timerIsRunning = false;
             }
-        }
     }
 
     void DisplayTimer(float timeDisplayed)
