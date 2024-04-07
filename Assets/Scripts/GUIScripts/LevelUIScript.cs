@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 
 public class LevelUIScript : MonoBehaviour
 {
-    [SerializeField] Button openRightPopUpButton, closeRightPopUpButton, homeButton;
+    [SerializeField] Button openRightPopUpButton, closeRightPopUpButton, restartButton, homeButton, settingButton, quitButton;
     [SerializeField] AudioClip buttonSound;
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI scoreText;
@@ -25,11 +25,14 @@ public class LevelUIScript : MonoBehaviour
 
     private void Awake()
     {
-        rightPopUp = GameObject.Find("/Canvas/RightPopUp");
+        rightPopUp = GameObject.Find("RightPopUp");
 
         openRightPopUpButton.onClick.AddListener(OpenRightPopUp);
         closeRightPopUpButton.onClick.AddListener(CloseRightPopUp);
+        restartButton.onClick.AddListener(RestartLevel);
         homeButton.onClick.AddListener(OpenLevelMap);
+        settingButton.onClick.AddListener(OpenSettings);
+        quitButton.onClick.AddListener(QuitGame);
 
         earnedPoints = 0;
         timeRemaining = amountTime;
@@ -59,6 +62,7 @@ public class LevelUIScript : MonoBehaviour
         }
     }
 
+    #region GUI 
     void OpenRightPopUp() 
     {
         openRightPopUpButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
@@ -75,12 +79,35 @@ public class LevelUIScript : MonoBehaviour
         rightPopUp.SetActive(false);
     }
 
+    void RestartLevel()
+    {
+        restartButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     void OpenLevelMap()
     {
         homeButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
         StartCoroutine(WaitForSound());
         SceneManager.LoadScene("LevelMapScene");
     }
+
+    void OpenSettings()
+    {
+        settingButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        SceneManager.LoadScene("SettingsScene");
+    }
+
+    void QuitGame()
+    {
+        Application.Quit(); 
+    }
+
+    #endregion
+
+
 
     void LevelTimer()
     {
