@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 
 public class LevelUIScript : MonoBehaviour
 {
-    [SerializeField] Button openRightPopUpButton, closeRightPopUpButton, homeButton;
+    [SerializeField] Button openRightPopUpButton, closeRightPopUpButton, restartButton, homeButton, settingButton, quitButton;
     [SerializeField] AudioClip buttonSound;
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI scoreText;
@@ -25,11 +25,14 @@ public class LevelUIScript : MonoBehaviour
 
     private void Awake()
     {
-        rightPopUp = GameObject.Find("/Canvas/RightPopUp");
+        rightPopUp = GameObject.Find("RightPopUp");
 
         openRightPopUpButton.onClick.AddListener(OpenRightPopUp);
         closeRightPopUpButton.onClick.AddListener(CloseRightPopUp);
+        restartButton.onClick.AddListener(RestartLevel);
         homeButton.onClick.AddListener(OpenLevelMap);
+        settingButton.onClick.AddListener(OpenSettings);
+        quitButton.onClick.AddListener(QuitGame);
 
         earnedPoints = 0;
         timeRemaining = amountTime;
@@ -53,13 +56,18 @@ public class LevelUIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LevelTimer();
+        if (timerIsRunning)
+        {
+            LevelTimer();
+        }
     }
 
+    #region GUI 
     void OpenRightPopUp() 
     {
         openRightPopUpButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
         StartCoroutine(WaitForSound());
+        timerIsRunning = false;
         rightPopUp.SetActive(true);
     }
 
@@ -67,7 +75,15 @@ public class LevelUIScript : MonoBehaviour
     {
         closeRightPopUpButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
         StartCoroutine(WaitForSound());
+        timerIsRunning = true;
         rightPopUp.SetActive(false);
+    }
+
+    void RestartLevel()
+    {
+        restartButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void OpenLevelMap()
@@ -77,10 +93,24 @@ public class LevelUIScript : MonoBehaviour
         SceneManager.LoadScene("LevelMapScene");
     }
 
+    void OpenSettings()
+    {
+        settingButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        SceneManager.LoadScene("SettingsScene");
+    }
+
+    void QuitGame()
+    {
+        Application.Quit(); 
+    }
+
+    #endregion
+
+
+
     void LevelTimer()
     {
-        if (timerIsRunning)
-        {
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
@@ -91,7 +121,6 @@ public class LevelUIScript : MonoBehaviour
                 timeRemaining = 0;
                 timerIsRunning = false;
             }
-        }
     }
 
     void DisplayTimer(float timeDisplayed)
