@@ -7,15 +7,15 @@ public class PlayerCharacterScript : MonoBehaviour
 {
 
     [SerializeField] List<GameObject> items = new List<GameObject>();
-    public List<TaskDataScript> nextTask = new List<TaskDataScript>();
-
     [SerializeField] GameObject[] inventorySlots;
-    [SerializeField] Image[] imageSlots;
+
+    public List<TaskDataScript> nextTask = new List<TaskDataScript>();
 
     private void Awake()
     {
         
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,23 +30,22 @@ public class PlayerCharacterScript : MonoBehaviour
 
     void InitializeInventory()
     {
-        for (int i = 0; i < inventorySlots.Length; i++)
+        foreach (GameObject slot in inventorySlots)
         {
-            inventorySlots[i].SetActive(false);
+            slot.SetActive(false);
         }
     }
 
     void MoveToWayPoint()
     {
-        Debug.Log("Test 3: MoveToWayPoint");
+        //Debug.Log("Test 3: MoveToWayPoint");
 
         if (nextTask.Count > 0)
         {
-            Debug.Log("Test 4: MoveToWayPoint");
+            //Debug.Log("Test 4: MoveToWayPoint");
 
             this.transform.localPosition = nextTask[0].wayPointPosition;
-            this.transform.rotation = Quaternion.Euler(transform.localEulerAngles.x, 0.0f, 0.0f);
-
+            TakeItem();
             nextTask.RemoveAt(0);
         }
     }
@@ -65,12 +64,12 @@ public class PlayerCharacterScript : MonoBehaviour
 
     void AddToInventory(GameObject item)
     {
-        for (int i = 0; i < inventorySlots.Length; i++)
+        foreach (GameObject slot in inventorySlots)
         {
-            if (!inventorySlots[i].activeSelf) // Find an empty slot
+            if (!slot.activeSelf) // Find an empty slot
             {
-                inventorySlots[i].SetActive(true);
-                imageSlots[i].sprite = item.GetComponent<SpriteRenderer>().sprite;
+                slot.SetActive(true);
+                slot.GetComponent<SpriteRenderer>().sprite = item.GetComponent<SpriteRenderer>().sprite;
                 break; // Exit loop after adding the item
             }
         }
