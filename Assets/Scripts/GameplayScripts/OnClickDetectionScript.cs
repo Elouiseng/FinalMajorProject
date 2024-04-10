@@ -37,7 +37,7 @@ public class OnClickDetectionScript : MonoBehaviour
         //{
             Debug.Log("Test 2 : OnMouseDown");
 
-            characterScript.nextTask.Add(new TaskDataScript(navigatorsParent.name, navigatorsWayPoint.transform.position));
+            characterScript.nextTask.Add(new TaskDataScript(navigatorsParent.gameObject, navigatorsParent.name, navigatorsParent.tag, navigatorsWayPoint.transform.position));
         //}
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Progress;
 
@@ -7,6 +8,7 @@ public class CustomerScript : MonoBehaviour
 {
     private GameObject[] items;
     [SerializeField] GameObject orderSlot;
+    [SerializeField] Sprite cashRegister;
 
     private void Awake()
     {
@@ -35,5 +37,19 @@ public class CustomerScript : MonoBehaviour
             
             orderSlot.GetComponent<SpriteRenderer>().sprite = items[randomIndex].GetComponent<SpriteRenderer>().sprite;
         }
+    }
+
+    public GameObject GetWantedItem()
+    {
+        if (orderSlot.GetComponent<SpriteRenderer>().sprite != null)
+        {
+            return orderSlot.gameObject;
+
+        }
+        else
+        {
+            return null;
+        }
+
     }
 }

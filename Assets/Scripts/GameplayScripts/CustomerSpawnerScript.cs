@@ -31,7 +31,14 @@ public class CustomerSpawnerScript : MonoBehaviour
     {
         while (spawnCount < amountCustomersInLevel)
         {
-            yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
+            if(spawnCount < 1)
+            {
+                yield return new WaitForSeconds(2.0f);
+            }
+            else
+            {
+                yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
+            }
 
             if (spawnCount < amountCustomersInLevel)
             {

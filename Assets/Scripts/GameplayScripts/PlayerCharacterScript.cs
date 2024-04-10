@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -16,13 +17,11 @@ public class PlayerCharacterScript : MonoBehaviour
         
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         InitializeInventory();
     }
 
-    // Update is called once per frame
     void Update()
     {
         MoveToWayPoint();
@@ -46,6 +45,7 @@ public class PlayerCharacterScript : MonoBehaviour
 
             this.transform.localPosition = nextTask[0].wayPointPosition;
             TakeItem();
+            RemoveItem();
             nextTask.RemoveAt(0);
         }
     }
@@ -62,16 +62,42 @@ public class PlayerCharacterScript : MonoBehaviour
         }
     }
 
+    void RemoveItem()
+    {
+        if (nextTask[0].taskObjectTag.Equals("NPC"))
+        {
+            CustomerScript customerScript = nextTask[0].taskObject.GetComponent<CustomerScript>();
+
+            if (customerScript != null)
+            {
+                GameObject wantedItem = customerScript.GetWantedItem();
+                if (wantedItem != null)
+                {
+                    foreach (GameObject slot in inventorySlots)
+                    {
+                        if (slot.activeSelf && slot.GetComponent<SpriteRenderer>().sprite == wantedItem.GetComponent<SpriteRenderer>().sprite)
+                        {
+                            slot.SetActive(false); 
+                            Destroy(wantedItem); 
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     void AddToInventory(GameObject item)
     {
         foreach (GameObject slot in inventorySlots)
         {
-            if (!slot.activeSelf) // Find an empty slot
+            if (!slot.activeSelf) 
             {
                 slot.SetActive(true);
                 slot.GetComponent<SpriteRenderer>().sprite = item.GetComponent<SpriteRenderer>().sprite;
-                break; // Exit loop after adding the item
+                break; 
             }
         }
     }
+
 }
