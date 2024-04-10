@@ -9,7 +9,9 @@ public class PlayerCharacterScript : MonoBehaviour
 
     [SerializeField] List<GameObject> items = new List<GameObject>();
     [SerializeField] GameObject[] inventorySlots;
+    [SerializeField] Sprite cashRegister;
 
+    private CustomerScript customerScript;
     public List<TaskDataScript> nextTask = new List<TaskDataScript>();
 
     private void Awake()
@@ -46,6 +48,13 @@ public class PlayerCharacterScript : MonoBehaviour
             this.transform.localPosition = nextTask[0].wayPointPosition;
             TakeItem();
             RemoveItem();
+            if (nextTask[0].taskObjectName.Equals("CashRegister"))
+            {
+                if(customerScript.wantsToPay == true)
+                {
+                    Destroy(customerScript.gameObject);
+                }
+            }
             nextTask.RemoveAt(0);
         }
     }
@@ -66,9 +75,10 @@ public class PlayerCharacterScript : MonoBehaviour
     {
         if (nextTask[0].taskObjectTag.Equals("NPC"))
         {
-            CustomerScript customerScript = nextTask[0].taskObject.GetComponent<CustomerScript>();
+            customerScript = nextTask[0].taskObject.GetComponent<CustomerScript>();
+            PetBehaviorScript petBehaviorScript = nextTask[0].taskObject.GetComponent<PetBehaviorScript>();
 
-            if (customerScript != null)
+            if (customerScript != null && petBehaviorScript == null)
             {
                 GameObject wantedItem = customerScript.GetWantedItem();
                 if (wantedItem != null)
@@ -77,8 +87,10 @@ public class PlayerCharacterScript : MonoBehaviour
                     {
                         if (slot.activeSelf && slot.GetComponent<SpriteRenderer>().sprite == wantedItem.GetComponent<SpriteRenderer>().sprite)
                         {
-                            slot.SetActive(false); 
-                            Destroy(wantedItem); 
+                            slot.SetActive(false);
+                            wantedItem.GetComponent<SpriteRenderer>().sprite = cashRegister;
+                            customerScript.wantsToPay = true;
+                            
                             break;
                         }
                     }
