@@ -8,9 +8,11 @@ using UnityEngine.Audio;
 
 public class LevelUIScript : MonoBehaviour
 {
-    [SerializeField] Button openRightPopUpButton, closeRightPopUpButton, restartButton, homeButton, settingButton, quitButton, finishRestartButton, finishContinueButton;
+    [SerializeField] Button openRightPopUpButton, closeRightPopUpButton, restartButton, homeButton, settingButton, quitButton;
     [SerializeField] AudioClip buttonSound;
-    [SerializeField] TextMeshProUGUI timeText, scoreText, levelText, finishScoreText, highscoreText;
+    [SerializeField] TextMeshProUGUI timeText;
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] string levelName;
     [SerializeField] float amountTime;
     [SerializeField] AudioMixer audioMixer;
@@ -19,12 +21,11 @@ public class LevelUIScript : MonoBehaviour
     private float timeRemaining;
     private bool timerIsRunning;
     private int earnedPoints;
-    private GameObject rightPopUp, finishingImage;
+    private GameObject rightPopUp;
 
     private void Awake()
     {
         rightPopUp = GameObject.Find("RightPopUp");
-        finishingImage = GameObject.Find("FinishingImage");
 
         openRightPopUpButton.onClick.AddListener(OpenRightPopUp);
         closeRightPopUpButton.onClick.AddListener(CloseRightPopUp);
@@ -32,8 +33,6 @@ public class LevelUIScript : MonoBehaviour
         homeButton.onClick.AddListener(OpenLevelMap);
         settingButton.onClick.AddListener(OpenSettings);
         quitButton.onClick.AddListener(QuitGame);
-        finishRestartButton.onClick.AddListener(RestartLevel);
-        finishContinueButton.onClick.AddListener(OpenLevelMap);
 
         earnedPoints = 0;
         timeRemaining = amountTime;
@@ -51,7 +50,6 @@ public class LevelUIScript : MonoBehaviour
         levelText.text += " " + levelName;
 
         rightPopUp.SetActive(false);
-        finishingImage.SetActive(false);
         timerIsRunning = true;
     }
 
@@ -113,17 +111,16 @@ public class LevelUIScript : MonoBehaviour
 
     void LevelTimer()
     {
-        if (timeRemaining > 0)
-        {
-            timeRemaining -= Time.deltaTime;
-            DisplayTimer(timeRemaining);
-        }
-        else
-        {
-            timeRemaining = 0;
-            timerIsRunning = false;
-            finishingImage.SetActive(true);
-        }
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+                DisplayTimer(timeRemaining);
+            }
+            else
+            {
+                timeRemaining = 0;
+                timerIsRunning = false;
+            }
     }
 
     void DisplayTimer(float timeDisplayed)
@@ -137,19 +134,7 @@ public class LevelUIScript : MonoBehaviour
 
     void DisplayPoints()
     {
-        scoreText.text = earnedPoints.ToString();
-    }
-
-    void OnLevelFinish()
-    {
-        finishScoreText.text = earnedPoints.ToString();
-
-        if (earnedPoints > PlayerPrefs.GetInt("LevelOneHighscore"))
-        {
-            PlayerPrefs.SetInt("LevelOneHighscore", earnedPoints);
-        }
-
-        highscoreText.text = PlayerPrefs.GetInt("LevelOneHighscore").ToString();
+        
     }
 
     IEnumerator WaitForSound()
