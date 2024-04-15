@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Navigator
+  - Item
+  - NPC
   layers:
   - Default
   - TransparentFX

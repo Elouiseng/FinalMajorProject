@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,22 +8,22 @@ public class PlayerCharacterScript : MonoBehaviour
 {
 
     [SerializeField] List<GameObject> items = new List<GameObject>();
-    public List<TaskDataScript> nextTask = new List<TaskDataScript>();
-
     [SerializeField] GameObject[] inventorySlots;
-    [SerializeField] Image[] imageSlots;
+    [SerializeField] Sprite cashRegister;
+
+    private CustomerScript customerScript;
+    public List<TaskDataScript> nextTask = new List<TaskDataScript>();
 
     private void Awake()
     {
         
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         InitializeInventory();
     }
 
-    // Update is called once per frame
     void Update()
     {
         MoveToWayPoint();
@@ -30,23 +31,30 @@ public class PlayerCharacterScript : MonoBehaviour
 
     void InitializeInventory()
     {
-        for (int i = 0; i < inventorySlots.Length; i++)
+        foreach (GameObject slot in inventorySlots)
         {
-            inventorySlots[i].SetActive(false);
+            slot.SetActive(false);
         }
     }
 
     void MoveToWayPoint()
     {
-        Debug.Log("Test 3: MoveToWayPoint");
+        //Debug.Log("Test 3: MoveToWayPoint");
 
         if (nextTask.Count > 0)
         {
-            Debug.Log("Test 4: MoveToWayPoint");
+            //Debug.Log("Test 4: MoveToWayPoint");
 
             this.transform.localPosition = nextTask[0].wayPointPosition;
-            this.transform.rotation = Quaternion.Euler(transform.localEulerAngles.x, 0.0f, 0.0f);
-
+            TakeItem();
+            RemoveItem();
+            if (nextTask[0].taskObjectName.Equals("CashRegister"))
+            {
+                if(customerScript.wantsToPay == true)
+                {
+                    Destroy(customerScript.gameObject);
+                }
+            }
             nextTask.RemoveAt(0);
         }
     }
@@ -63,16 +71,45 @@ public class PlayerCharacterScript : MonoBehaviour
         }
     }
 
-    void AddToInventory(GameObject item)
+    void RemoveItem()
     {
-        for (int i = 0; i < inventorySlots.Length; i++)
+        if (nextTask[0].taskObjectTag.Equals("NPC"))
         {
-            if (!inventorySlots[i].activeSelf) // Find an empty slot
+            customerScript = nextTask[0].taskObject.GetComponent<CustomerScript>();
+            PetBehaviorScript petBehaviorScript = nextTask[0].taskObject.GetComponent<PetBehaviorScript>();
+
+            if (customerScript != null && petBehaviorScript == null)
             {
-                inventorySlots[i].SetActive(true);
-                imageSlots[i].sprite = item.GetComponent<SpriteRenderer>().sprite;
-                break; // Exit loop after adding the item
+                GameObject wantedItem = customerScript.GetWantedItem();
+                if (wantedItem != null)
+                {
+                    foreach (GameObject slot in inventorySlots)
+                    {
+                        if (slot.activeSelf && slot.GetComponent<SpriteRenderer>().sprite == wantedItem.GetComponent<SpriteRenderer>().sprite)
+                        {
+                            slot.SetActive(false);
+                            wantedItem.GetComponent<SpriteRenderer>().sprite = cashRegister;
+                            customerScript.wantsToPay = true;
+                            
+                            break;
+                        }
+                    }
+                }
             }
         }
     }
+
+    void AddToInventory(GameObject item)
+    {
+        foreach (GameObject slot in inventorySlots)
+        {
+            if (!slot.activeSelf) 
+            {
+                slot.SetActive(true);
+                slot.GetComponent<SpriteRenderer>().sprite = item.GetComponent<SpriteRenderer>().sprite;
+                break; 
+            }
+        }
+    }
+
 }
