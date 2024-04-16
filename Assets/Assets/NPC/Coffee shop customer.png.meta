@@ -128,7 +128,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Coffee shop customer_0: 2383864252236038903
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
