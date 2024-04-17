@@ -1284,6 +1284,7 @@ MonoBehaviour:
   - {fileID: 621186028}
   - {fileID: 1486740912}
   cashRegister: {fileID: -2923564674388226516, guid: 790d110a4b67f8b4ebf800bb2fbf84c6, type: 3}
+  levelHandler: {fileID: 712864718}
   nextTask: []
 --- !u!58 &650089573
 CircleCollider2D:
@@ -1480,6 +1481,7 @@ MonoBehaviour:
   levelName: 1-1
   amountTime: 60
   audioMixer: {fileID: 24100000, guid: 511a6d534a7807a469b416186cf04118, type: 2}
+  earnedPoints: 0
 --- !u!114 &712864723
 MonoBehaviour:
   m_ObjectHideFlags: 0

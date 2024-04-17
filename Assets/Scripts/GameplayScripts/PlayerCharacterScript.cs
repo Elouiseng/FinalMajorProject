@@ -10,6 +10,7 @@ public class PlayerCharacterScript : MonoBehaviour
     [SerializeField] List<GameObject> items = new List<GameObject>();
     [SerializeField] GameObject[] inventorySlots;
     [SerializeField] Sprite cashRegister;
+    [SerializeField] GameObject levelHandler;
 
     private CustomerScript customerScript;
     public List<TaskDataScript> nextTask = new List<TaskDataScript>();
@@ -90,7 +91,7 @@ public class PlayerCharacterScript : MonoBehaviour
                             slot.SetActive(false);
                             wantedItem.GetComponent<SpriteRenderer>().sprite = cashRegister;
                             customerScript.wantsToPay = true;
-                            
+                            levelHandler.GetComponent<LevelUIScript>().earnedPoints += 5;
                             break;
                         }
                     }

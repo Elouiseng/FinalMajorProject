@@ -18,7 +18,7 @@ public class LevelUIScript : MonoBehaviour
 
     private float timeRemaining;
     private bool timerIsRunning;
-    private int earnedPoints;
+    public int earnedPoints;
     private GameObject rightPopUp, finishingImage;
 
     private void Awake()
@@ -61,6 +61,7 @@ public class LevelUIScript : MonoBehaviour
         if (timerIsRunning)
         {
             LevelTimer();
+            DisplayPoints();
         }
     }
 
