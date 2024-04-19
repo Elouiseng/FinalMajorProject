@@ -124,6 +124,7 @@ public class LevelUIScript : MonoBehaviour
             timeRemaining = 0;
             timerIsRunning = false;
             finishingImage.SetActive(true);
+            OnLevelFinish();
         }
     }
 

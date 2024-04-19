@@ -32,4 +32,17 @@ public class PetBehaviorScript : MonoBehaviour
             Debug.LogWarning("No item or Slot Sprite");
         }
     }
+
+    public GameObject GetWantedItem()
+    {
+        if (orderSlot.GetComponent<SpriteRenderer>().sprite != null)
+        {
+            return orderSlot.gameObject;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
 }

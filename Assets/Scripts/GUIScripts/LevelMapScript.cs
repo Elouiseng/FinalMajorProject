@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,8 +11,10 @@ public class LevelMapScript : MonoBehaviour
     [SerializeField] Button level1Button, closeL1PopUpButton, level2Button, closeL2PopUpButton;
     [SerializeField] Button level1PlayButton, level2PlayButton;
     [SerializeField] AudioClip buttonSound;
+    [SerializeField] TextMeshProUGUI level1HighscoreT;
 
     private GameObject rightPopUp, level1PopUp, level2PopUp, nextLevelMapB;
+
 
 
     private void Awake()
@@ -88,6 +91,7 @@ public class LevelMapScript : MonoBehaviour
         {        
             level1Button.GetComponent<AudioSource>().PlayOneShot(buttonSound);
             StartCoroutine(WaitForSound());
+            DisplayHighscore();
             level1PopUp.SetActive(true);
         }
     }
@@ -104,6 +108,11 @@ public class LevelMapScript : MonoBehaviour
         closeL1PopUpButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
         StartCoroutine(WaitForSound());
         level1PopUp.SetActive(false);
+    }
+
+    void DisplayHighscore()
+    {
+        level1HighscoreT.text = PlayerPrefs.GetInt("LevelOneHighscore").ToString();
     }
     #endregion
 

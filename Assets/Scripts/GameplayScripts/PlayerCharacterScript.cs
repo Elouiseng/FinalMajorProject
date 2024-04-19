@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class PlayerCharacterScript : MonoBehaviour
 {
 
     [SerializeField] List<GameObject> items = new List<GameObject>();
-    [SerializeField] GameObject[] inventorySlots;
+    [SerializeField] Image[] inventorySlots;
     [SerializeField] Sprite cashRegister;
     [SerializeField] GameObject levelHandler;
 
@@ -17,12 +17,11 @@ public class PlayerCharacterScript : MonoBehaviour
 
     private void Awake()
     {
-        
+        InitializeInventory();
     }
 
     void Start()
     {
-        InitializeInventory();
     }
 
     void Update()
@@ -32,9 +31,9 @@ public class PlayerCharacterScript : MonoBehaviour
 
     void InitializeInventory()
     {
-        foreach (GameObject slot in inventorySlots)
+        foreach (Image image in inventorySlots)
         {
-            slot.SetActive(false);
+            image.gameObject.SetActive(false);
         }
     }
 
@@ -51,8 +50,9 @@ public class PlayerCharacterScript : MonoBehaviour
             RemoveItem();
             if (nextTask[0].taskObjectName.Equals("CashRegister"))
             {
-                if(customerScript.wantsToPay == true)
+                if(customerScript != null && customerScript.wantsToPay == true)
                 {
+                    levelHandler.GetComponent<LevelUIScript>().earnedPoints += 5;
                     Destroy(customerScript.gameObject);
                 }
             }
@@ -78,19 +78,37 @@ public class PlayerCharacterScript : MonoBehaviour
         {
             customerScript = nextTask[0].taskObject.GetComponent<CustomerScript>();
             PetBehaviorScript petBehaviorScript = nextTask[0].taskObject.GetComponent<PetBehaviorScript>();
+            GameObject wantedItem = null;
 
             if (customerScript != null && petBehaviorScript == null)
             {
-                GameObject wantedItem = customerScript.GetWantedItem();
+                wantedItem = customerScript.GetWantedItem();
                 if (wantedItem != null)
                 {
-                    foreach (GameObject slot in inventorySlots)
+                    foreach (Image slot in inventorySlots)
                     {
-                        if (slot.activeSelf && slot.GetComponent<SpriteRenderer>().sprite == wantedItem.GetComponent<SpriteRenderer>().sprite)
+                        if (slot.gameObject.activeSelf && slot.sprite == wantedItem.GetComponent<SpriteRenderer>().sprite)
                         {
-                            slot.SetActive(false);
+                            slot.gameObject.SetActive(false);
                             wantedItem.GetComponent<SpriteRenderer>().sprite = cashRegister;
                             customerScript.wantsToPay = true;
+                            levelHandler.GetComponent<LevelUIScript>().earnedPoints += 5;
+                            break;
+                        }
+                    }
+                }
+            }
+            else if(customerScript == null && petBehaviorScript != null)
+            {
+                wantedItem = petBehaviorScript.GetWantedItem();
+                if (wantedItem != null)
+                {
+                    foreach (Image slot in inventorySlots)
+                    {
+                        if (slot.gameObject.activeSelf && slot.GetComponent<SpriteRenderer>().sprite == wantedItem.GetComponent<SpriteRenderer>().sprite)
+                        {
+                            slot.gameObject.SetActive(false);
+                            wantedItem.GetComponent<SpriteRenderer>().sprite = null;
                             levelHandler.GetComponent<LevelUIScript>().earnedPoints += 5;
                             break;
                         }
@@ -102,12 +120,12 @@ public class PlayerCharacterScript : MonoBehaviour
 
     void AddToInventory(GameObject item)
     {
-        foreach (GameObject slot in inventorySlots)
+        foreach (Image slot in inventorySlots)
         {
-            if (!slot.activeSelf) 
+            if (!slot.gameObject.activeSelf) 
             {
-                slot.SetActive(true);
-                slot.GetComponent<SpriteRenderer>().sprite = item.GetComponent<SpriteRenderer>().sprite;
+                slot.gameObject.SetActive(true);
+                slot.sprite = item.GetComponent<SpriteRenderer>().sprite;
                 break; 
             }
         }

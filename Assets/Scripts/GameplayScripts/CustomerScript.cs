@@ -22,6 +22,7 @@ public class CustomerScript : MonoBehaviour
         wantsToPay = false;
 
         Invoke("ShowWantedItem", 3.0f);
+        
     }
 
     // Update is called once per frame
@@ -45,12 +46,16 @@ public class CustomerScript : MonoBehaviour
         if (orderSlot.GetComponent<SpriteRenderer>().sprite != null)
         {
             return orderSlot.gameObject;
-
         }
         else
         {
             return null;
         }
+
+    }
+
+    void MoveToCounter()
+    {
 
     }
 }

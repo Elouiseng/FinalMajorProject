@@ -31,9 +31,13 @@ public class CustomerSpawnerScript : MonoBehaviour
     {
         while (spawnCount < amountCustomersInLevel)
         {
-            if(spawnCount < 1)
+            //while (CountCustomersInScene() >= 1)
+            //{
+            //    yield return null;
+            //}
+            if (spawnCount < 1)
             {
-                yield return new WaitForSeconds(2.0f);
+                yield return new WaitForSeconds(1.0f);
             }
             else
             {
