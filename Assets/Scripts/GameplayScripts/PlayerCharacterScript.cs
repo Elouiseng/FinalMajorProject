@@ -105,7 +105,7 @@ public class PlayerCharacterScript : MonoBehaviour
                 {
                     foreach (Image slot in inventorySlots)
                     {
-                        if (slot.gameObject.activeSelf && slot.GetComponent<SpriteRenderer>().sprite == wantedItem.GetComponent<SpriteRenderer>().sprite)
+                        if (slot.gameObject.activeSelf && slot.sprite == wantedItem.GetComponent<SpriteRenderer>().sprite)
                         {
                             slot.gameObject.SetActive(false);
                             wantedItem.GetComponent<SpriteRenderer>().sprite = null;
