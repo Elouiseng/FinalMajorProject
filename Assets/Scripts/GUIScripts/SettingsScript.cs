@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 public class SettingsScript : MonoBehaviour
 {
-    [SerializeField] Button graphicsButton, audioButton, otherButton, closeSettingsButton, creditsButton, deleteProgressButton, yesDeleteButton, noDeleteButton;
+    [SerializeField] Button graphicsButton, audioButton, otherButton, closeSettingsButton, creditsButton, deleteProgressButton, yesDeleteButton, noDeleteButton, tutorialButton;
     [SerializeField] AudioClip buttonSound;
 
     private int nextSceneToOpen;
@@ -29,7 +29,7 @@ public class SettingsScript : MonoBehaviour
         graphicsButton.onClick.AddListener(ShowGraphicsSettings);
         audioButton.onClick.AddListener(ShowAudioSettings);
         otherButton.onClick.AddListener(ShowOtherSettings);
-
+        tutorialButton.onClick.AddListener(ShowTutorialScene);
         creditsButton.onClick.AddListener(OpenCreditsScene);
         deleteProgressButton.onClick.AddListener(OnDeleteProgressButtonClick);
 
@@ -118,6 +118,13 @@ public class SettingsScript : MonoBehaviour
         yesDeleteButton.onClick.RemoveAllListeners();
         noDeleteButton.onClick.RemoveAllListeners();
         deleteRequestImage.SetActive(false);
+    }
+
+    void ShowTutorialScene()
+    {
+        tutorialButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        SceneManager.LoadScene("TutorialScene");
     }
 
     IEnumerator WaitForSound()
