@@ -99,6 +99,8 @@ public class LevelUIScript : MonoBehaviour
     void OpenSettings()
     {
         settingButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        PlayerPrefs.SetInt("previousScene", currentScene);
         StartCoroutine(WaitForSound());
         SceneManager.LoadScene("SettingsScene");
     }
