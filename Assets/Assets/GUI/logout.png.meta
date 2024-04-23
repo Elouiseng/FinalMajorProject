@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 7e3496e3518974e43ba0fbf3cfb3629a
+guid: 21686094b2dc69f4daa1aec006f0b611
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1133784915670954263
-    second: Screenshot 2024-04-20 221055_0
+      213: -5975938820719141926
+    second: logout_0
+  - first:
+      213: 2282891400840467557
+    second: logout_1
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -83,7 +86,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Standalone
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -95,7 +98,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -122,22 +125,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Screenshot 2024-04-20 221055_0
+      name: logout_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 130
-        height: 299
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9ee8cb150acf340f0800000000000000
-      internalID: -1133784915670954263
+      spriteID: adb919fed43311da0800000000000000
+      internalID: -5975938820719141926
       vertices: []
       indices: 
       edges: []
@@ -145,7 +148,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 02201b0a4026ead43bdfb998d0182d2d
     internalID: 0
     vertices: []
     indices: 
@@ -153,7 +156,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Screenshot 2024-04-20 221055_0: -1133784915670954263
+      logout_0: -5975938820719141926
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
