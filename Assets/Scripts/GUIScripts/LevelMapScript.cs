@@ -8,12 +8,13 @@ using UnityEngine.UI;
 public class LevelMapScript : MonoBehaviour
 {
     [SerializeField] Button openPopUpButton, closePopUpButton, settingsButton, quitButton, nextLevelMapButton;
-    [SerializeField] Button level1Button, closeL1PopUpButton, level2Button, closeL2PopUpButton;
+    [SerializeField] Button level1Button, level2Button, level3Button, level4Button, level5Button;
+    [SerializeField] Button closeL1PopUpButton, closeL2PopUpButton, closeL3PopUpButton, closeL4PopUpButton, closeL5PopUpButton;
     [SerializeField] Button level1PlayButton, level2PlayButton;
     [SerializeField] AudioClip buttonSound;
     [SerializeField] TextMeshProUGUI level1HighscoreT;
 
-    private GameObject rightPopUp, level1PopUp, level2PopUp, nextLevelMapB;
+    private GameObject rightPopUp, level1PopUp, level2PopUp, level3PopUp, level4PopUp, level5PopUp, nextLevelMapB;
 
 
 
@@ -22,6 +23,9 @@ public class LevelMapScript : MonoBehaviour
         rightPopUp = GameObject.Find("/Canvas/RightPopUp");
         level1PopUp = GameObject.Find("LevelStartPopUps/Level1PopUp");
         level2PopUp = GameObject.Find("LevelStartPopUps/Level2PopUp");
+        level3PopUp = GameObject.Find("LevelStartPopUps/Level3PopUp");
+        level4PopUp = GameObject.Find("LevelStartPopUps/Level4PopUp");
+        level5PopUp = GameObject.Find("LevelStartPopUps/Level5PopUp");
         nextLevelMapB = GameObject.Find("/Canvas/NextLevelMapButton");
 
         openPopUpButton.onClick.AddListener(OpenRightPopUp);
@@ -29,13 +33,7 @@ public class LevelMapScript : MonoBehaviour
         settingsButton.onClick.AddListener(OpenSettings);
         quitButton.onClick.AddListener(QuitGame);
 
-        level1Button.onClick.AddListener(OpenLevel1PopUp);
-        level1PlayButton.onClick.AddListener(StartLevel1);
-        closeL1PopUpButton.onClick.AddListener(CloseLevel1PopUp);
-
-        level2Button.onClick.AddListener(OpenLevel2PopUp);
-        level2PlayButton.onClick.AddListener(StartLevel2);
-        closeL2PopUpButton.onClick.AddListener(CloseLevel2PopUp);
+        LevelButtonsOnAwake();
     }
     // Start is called before the first frame update
     void Start()
@@ -43,12 +41,16 @@ public class LevelMapScript : MonoBehaviour
         rightPopUp.SetActive(false);
         level1PopUp.SetActive(false);
         level2PopUp.SetActive(false);
+        level3PopUp.SetActive(false);
+        level4PopUp.SetActive(false);
+        level5PopUp.SetActive(false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     #region Right Side Pop Up
@@ -84,11 +86,13 @@ public class LevelMapScript : MonoBehaviour
     }
     #endregion
 
+
+
     #region Level 1
     void OpenLevel1PopUp()
     {
-        if (level2PopUp.activeSelf ==  false)
-        {        
+        if (level2PopUp.activeSelf == false)
+        {
             level1Button.GetComponent<AudioSource>().PlayOneShot(buttonSound);
             StartCoroutine(WaitForSound());
             DisplayHighscore();
@@ -145,5 +149,73 @@ public class LevelMapScript : MonoBehaviour
     IEnumerator WaitForSound()
     {
         yield return new WaitForSeconds(buttonSound.length);
+    }
+
+
+    void LevelButtonsOnAwake()
+    {
+        level1Button.onClick.AddListener(OpenLevel1PopUp);
+        level2Button.onClick.AddListener(OpenLevel2PopUp);
+        level3Button.onClick.AddListener(OpenLevel3PopUp);
+        level4Button.onClick.AddListener(OpenLevel4PopUp);
+        level5Button.onClick.AddListener(OpenLevel5PopUp);
+
+        level1PlayButton.onClick.AddListener(StartLevel1);
+        level2PlayButton.onClick.AddListener(StartLevel2);
+
+        closeL1PopUpButton.onClick.AddListener(CloseLevel1PopUp);
+        closeL2PopUpButton.onClick.AddListener(CloseLevel2PopUp);
+        closeL3PopUpButton.onClick.AddListener(CloseLevel3PopUp);
+        closeL4PopUpButton.onClick.AddListener(CloseLevel4PopUp);
+        closeL5PopUpButton.onClick.AddListener(CloseLevel5PopUp);
+    }
+
+    void OpenLevel3PopUp()
+    {
+        if (level2PopUp.activeSelf == false)
+        {
+            level3Button.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+            StartCoroutine(WaitForSound());
+            level3PopUp.SetActive(true);
+        }
+    }
+
+    void OpenLevel4PopUp()
+    {
+        if (level2PopUp.activeSelf == false)
+        {
+            level4Button.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+            StartCoroutine(WaitForSound());
+            level4PopUp.SetActive(true);
+        }
+    }
+
+    void OpenLevel5PopUp()
+    {
+        if (level2PopUp.activeSelf == false)
+        {
+            level5Button.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+            StartCoroutine(WaitForSound());
+            level5PopUp.SetActive(true);
+        }
+    }
+
+    void CloseLevel3PopUp()
+    {
+        closeL3PopUpButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        level3PopUp.SetActive(false);
+    }
+    void CloseLevel4PopUp()
+    {
+        closeL4PopUpButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        level4PopUp.SetActive(false);
+    }
+    void CloseLevel5PopUp()
+    {
+        closeL5PopUpButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        StartCoroutine(WaitForSound());
+        level5PopUp.SetActive(false);
     }
 }
