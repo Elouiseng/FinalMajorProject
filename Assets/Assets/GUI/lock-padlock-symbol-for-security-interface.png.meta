@@ -152,7 +152,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      lock-padlock-symbol-for-security-interface_0: -6664594249091035005
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
