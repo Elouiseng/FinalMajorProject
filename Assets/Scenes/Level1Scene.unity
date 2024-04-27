@@ -250,6 +250,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1650948110 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1545323341288995747, guid: 21e2f20d6864b094599fd61f311d601f, type: 3}
+  m_PrefabInstance: {fileID: 7428282298896093044}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1684304837 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4590908198094591620, guid: 21e2f20d6864b094599fd61f311d601f, type: 3}
@@ -558,6 +569,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1122614416}
     - target: {fileID: 5895795225378098895, guid: 77bebf259dfe4cc4c9545902a28f7795, type: 3}
+      propertyPath: clearInventoryButton
+      value: 
+      objectReference: {fileID: 1650948110}
+    - target: {fileID: 5895795225378098895, guid: 77bebf259dfe4cc4c9545902a28f7795, type: 3}
       propertyPath: 'inventorySlots.Array.data[0]'
       value: 
       objectReference: {fileID: 1045635472}
@@ -589,6 +604,10 @@ PrefabInstance:
     - target: {fileID: 2325420591354633547, guid: fd24e4fbe4dfc0f438db70fe6fb2604d, type: 3}
       propertyPath: m_Name
       value: LevelHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 4975534534202141956, guid: fd24e4fbe4dfc0f438db70fe6fb2604d, type: 3}
+      propertyPath: amountCustomersInLevel
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6535573944828552121, guid: fd24e4fbe4dfc0f438db70fe6fb2604d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -755,18 +774,6 @@ PrefabInstance:
     - target: {fileID: 4878128473234700192, guid: 21e2f20d6864b094599fd61f311d601f, type: 3}
       propertyPath: m_Name
       value: Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559396613362242912, guid: 21e2f20d6864b094599fd61f311d601f, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559396613362242912, guid: 21e2f20d6864b094599fd61f311d601f, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559396613362242912, guid: 21e2f20d6864b094599fd61f311d601f, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -75
       objectReference: {fileID: 0}
     - target: {fileID: 7809719561351691719, guid: 21e2f20d6864b094599fd61f311d601f, type: 3}
       propertyPath: m_Pivot.x

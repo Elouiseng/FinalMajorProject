@@ -26,14 +26,14 @@ public class LevelUIScript : MonoBehaviour
         rightPopUp = GameObject.Find("RightPopUp");
         finishingImage = GameObject.Find("FinishingImage");
 
-        openRightPopUpButton.onClick.AddListener(OpenRightPopUp);
-        closeRightPopUpButton.onClick.AddListener(CloseRightPopUp);
-        restartButton.onClick.AddListener(RestartLevel);
-        homeButton.onClick.AddListener(OpenLevelMap);
+        openRightPopUpButton.onClick.AddListener(() => TogglePopUp(true));
+        closeRightPopUpButton.onClick.AddListener(() => TogglePopUp(false));
+        restartButton.onClick.AddListener(() => LoadSceneWithSound(SceneManager.GetActiveScene().name));
+        homeButton.onClick.AddListener(() => LoadSceneWithSound("LevelMapScene"));
         settingButton.onClick.AddListener(OpenSettings);
-        quitButton.onClick.AddListener(QuitGame);
-        finishRestartButton.onClick.AddListener(RestartLevel);
-        finishContinueButton.onClick.AddListener(OpenLevelMap);
+        quitButton.onClick.AddListener(Application.Quit);
+        finishRestartButton.onClick.AddListener(() => LoadSceneWithSound(SceneManager.GetActiveScene().name));
+        finishContinueButton.onClick.AddListener(() => LoadSceneWithSound("LevelMapScene"));
 
         earnedPoints = 0;
         timeRemaining = amountTime;
@@ -43,9 +43,7 @@ public class LevelUIScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioMixer.SetFloat("MainParam", Mathf.Log10(PlayerPrefs.GetFloat("MainVolume")) * 20);
-        audioMixer.SetFloat("MusicParam", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
-        audioMixer.SetFloat("FxParam", Mathf.Log10(PlayerPrefs.GetFloat("FxVolume")) * 20);
+        SetupAudio();
 
         scoreText.text += " " + earnedPoints;
         levelText.text += " " + levelName;
@@ -65,54 +63,40 @@ public class LevelUIScript : MonoBehaviour
         }
     }
 
-    #region GUI 
-    void OpenRightPopUp() 
+    private void SetupAudio()
     {
-        openRightPopUpButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
-        StartCoroutine(WaitForSound());
-        timerIsRunning = false;
-        rightPopUp.SetActive(true);
+        audioMixer.SetFloat("MainParam", Mathf.Log10(PlayerPrefs.GetFloat("MainVolume")) * 20);
+        audioMixer.SetFloat("MusicParam", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
+        audioMixer.SetFloat("FxParam", Mathf.Log10(PlayerPrefs.GetFloat("FxVolume")) * 20);
     }
 
-    void CloseRightPopUp()
+    private void PlaySound(AudioClip clip)
     {
-        closeRightPopUpButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
-        StartCoroutine(WaitForSound());
-        timerIsRunning = true;
-        rightPopUp.SetActive(false);
+        GetComponent<AudioSource>().PlayOneShot(clip);
     }
 
-    void RestartLevel()
+    void TogglePopUp(bool isOpen)
     {
-        restartButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
-        StartCoroutine(WaitForSound());
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        PlaySound(buttonSound);
+        StartCoroutine(WaitForSound(() => {
+            timerIsRunning = !isOpen;
+            rightPopUp.SetActive(isOpen);
+        }));
     }
 
-    void OpenLevelMap()
+    private void LoadSceneWithSound(string sceneName)
     {
-        homeButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
-        StartCoroutine(WaitForSound());
-        SceneManager.LoadScene("LevelMapScene");
+        PlaySound(buttonSound);
+        StartCoroutine(WaitForSound(() => SceneManager.LoadScene(sceneName)));
     }
 
     void OpenSettings()
     {
-        settingButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
+        PlaySound(buttonSound);
         int currentScene = SceneManager.GetActiveScene().buildIndex;
         PlayerPrefs.SetInt("previousScene", currentScene);
-        StartCoroutine(WaitForSound());
-        SceneManager.LoadScene("SettingsScene");
+        StartCoroutine(WaitForSound(() => SceneManager.LoadScene("SettingsScene")));
     }
-
-    void QuitGame()
-    {
-        Application.Quit(); 
-    }
-
-    #endregion
-
-
 
     void LevelTimer()
     {
@@ -156,8 +140,9 @@ public class LevelUIScript : MonoBehaviour
         highscoreText.text = PlayerPrefs.GetInt("LevelOneHighscore").ToString();
     }
 
-    IEnumerator WaitForSound()
+    IEnumerator WaitForSound(System.Action callback)
     {
         yield return new WaitForSeconds(buttonSound.length);
+        callback?.Invoke();
     }
 }

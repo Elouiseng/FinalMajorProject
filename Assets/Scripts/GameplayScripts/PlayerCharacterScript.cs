@@ -11,6 +11,7 @@ public class PlayerCharacterScript : MonoBehaviour
     [SerializeField] Image[] inventorySlots;
     [SerializeField] Sprite cashRegister;
     [SerializeField] GameObject levelHandler;
+    [SerializeField] Button clearInventoryButton;
 
     private CustomerScript customerScript;
     public List<TaskDataScript> nextTask = new List<TaskDataScript>();
@@ -22,6 +23,7 @@ public class PlayerCharacterScript : MonoBehaviour
 
     void Start()
     {
+        clearInventoryButton.onClick.AddListener(ClearInventory);
     }
 
     void Update()
@@ -131,4 +133,15 @@ public class PlayerCharacterScript : MonoBehaviour
         }
     }
 
+    void ClearInventory()
+    {
+        foreach(Image slot in inventorySlots)
+        {
+            if (slot.gameObject.activeSelf == true)
+            {
+                slot.gameObject.SetActive(false); 
+                slot.sprite = null;
+            }
+        }
+    }
 }
