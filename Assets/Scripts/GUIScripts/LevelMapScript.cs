@@ -135,7 +135,7 @@ public class LevelMapScript : MonoBehaviour
     {
         level2PlayButton.GetComponent<AudioSource>().PlayOneShot(buttonSound);
         StartCoroutine(WaitForSound());
-        //SceneManager.LoadScene("Level2Scene");
+        SceneManager.LoadScene("Level2Scene");
     }
 
     void CloseLevel2PopUp()
