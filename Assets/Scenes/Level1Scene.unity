@@ -4956,7 +4956,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2019510687808234093, guid: 72361aafd4a039844814378a2eef00ae, type: 3}
       propertyPath: m_Size.x
-      value: 4.9389076
+      value: 7.020219
       objectReference: {fileID: 0}
     - target: {fileID: 2019510687808234093, guid: 72361aafd4a039844814378a2eef00ae, type: 3}
       propertyPath: m_Size.y
@@ -4964,7 +4964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2019510687808234093, guid: 72361aafd4a039844814378a2eef00ae, type: 3}
       propertyPath: m_Offset.x
-      value: -0.118644714
+      value: -0.21325266
       objectReference: {fileID: 0}
     - target: {fileID: 2019510687808234093, guid: 72361aafd4a039844814378a2eef00ae, type: 3}
       propertyPath: m_Offset.y
@@ -6925,7 +6925,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customerPrefabs:
   - {fileID: 1242778273114167170, guid: 22058658efd15624ca7ec0a755a63f2e, type: 3}
-  amountCustomersInLevel: 2
+  amountCustomersInLevel: 6
   spawnPosition: {x: -7.5, y: -0.87, z: 0}
 --- !u!4 &7686701413572294317
 Transform:
